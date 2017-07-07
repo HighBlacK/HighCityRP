@@ -11,7 +11,7 @@ AddEventHandler("repair:repairkit", function()
 	
 	if DoesEntityExist(car) then
 	   PlayScenario("world_human_vehicle_mechanic")                       ------REPAIR ANIMATION---ANIMATION DE REPARATION
-	   --TriggerEvent('InteractSound_CL:PlayOnOne', 'repair', 1.0)        ------IF YOU HAVE THE INTERACT SOUND SCRIPT-------SI VOUS AVEZ LE SCRIPT INTERACT SOUND
+	   TriggerEvent('InteractSound_CL:PlayOnOne', 'repair', 1.0)          ------IF YOU HAVE THE INTERACT SOUND SCRIPT-------SI VOUS AVEZ LE SCRIPT INTERACT SOUND
 	   Wait(25000)                                                        ------TO SET HOW MANY TIME BEFORE THE VEHICLE IS FIXED----POUR DEFINIR COMBIEN DE TEMPS AVANT QUE LE VEHICULE SOIT REPARE
 	   --SetVehicleFixed(car)                                             ------IF YOU WANT TO FIX EVERYTHING----SI VOUS VOULEZ TOUT REPARER (PAS CONSEILLE SI VOUS AVEZ UN JOB DE DEPANEUR SUR VOTRE SERVEUR)
 	   --SetVehicleEngineHealth(car, 1000.0)                              ------IF YOU JUST WANT TO REPAIR THE ENGINE-----SI VOUS VOULEZ JUSTE REPARER LE MOTEUR          
