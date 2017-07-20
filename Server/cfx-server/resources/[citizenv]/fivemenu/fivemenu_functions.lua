@@ -154,6 +154,40 @@ AddEventHandler("vmenu:poleemploi", function(target, idJob) -- target = Dernier 
 	end
 end)
 
+Citizen.CreateThread(function ()
+	while true do
+	    Citizen.Wait(60000)
+		TriggerServerEvent("poleemploi:jobblips_s")
+	end	
+end)
+
+RegisterNetEvent("vmenu:Updatejobblips")
+AddEventHandler("vmenu:Updatejobblips", function(job)
+    myjob = job
+	removeBlip()
+	if myjob == 2 then
+	    AfficherPoolBlip()
+	elseif myjob == 3 then
+	    AfficherTrashBlip()
+	elseif myjob == 4 then
+	    AfficherMineBlip()
+	    AfficherSupermarket()
+	elseif myjob == 6 then
+	    AfficherTruckerBlip()
+	elseif myjob == 11 then
+	    AfficherCemteryBlip()
+	elseif myjob == 12 then
+	    AfficherMorgBlip()
+	elseif myjob == 14 then
+	    AfficherFarmBlip()
+		AfficherSupermarket()
+	elseif myjob == 20 then
+	    AfficherDeliveryBlip()
+	else
+	    removeBlip()
+	end
+end)
+
 RegisterNetEvent("vmenu:MainMenuOG")
 AddEventHandler("vmenu:MainMenuOG", function(target)
 	VMenu.police = false
@@ -674,7 +708,7 @@ local morgue = {x=223.208068847656,y=-1387.89562988281,z=30.5365390777588}
 
 function AfficherMorgBlip()
 
-  MorgBlip = AddBlipForCoord(cemtery.x,cemtery.y,cemtery.z)
+  MorgBlip = AddBlipForCoord(morgue.x,morgue.y,morgue.z)
   
   SetBlipSprite(MorgBlip, 310)
   SetBlipColour(MorgBlip, 2)

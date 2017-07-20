@@ -158,19 +158,20 @@ AddEventHandler("menupolice:PoliceOG", function(target, rangPolice) -- 0 rien, 1
 		VMenu.AddFunc(98, "Retour", "vmenu:MainMenuOG", {}, "Retour")
 		VMenu.AddSep(98, tostring(nameTarget))
 		if rangPolice == 6 then
-				VMenu.AddSep(98, "Commandant")
+				VMenu.AddTxT(98, "Commandant")
 		elseif rangPolice == 5 then
-				VMenu.AddSep(98, "Capitaine")
+				VMenu.AddTxT(98, "Capitaine")
 		elseif rangPolice == 4 then
-				VMenu.AddSep(98, "Lieutenant")
+				VMenu.AddTxT(98, "Lieutenant")
 		elseif rangPolice == 3 then
-				VMenu.AddSep(98, "Sergent")
+				VMenu.AddTxT(98, "Sergent")
 		elseif rangPolice == 2 then
-				VMenu.AddSep(98, "Brigadier")
+				VMenu.AddTxT(98, "Brigadier")
 		elseif rangPolice == 1 then
-				VMenu.AddSep(98, "Cadet")
+				VMenu.AddTxT(98, "Cadet")
 		end
 	 	VMenu.AddFunc(98, "Verifier papier", "menupolice:verifp", {}, "Accéder")
+		VMenu.AddFunc(98, "Verifier permis", "menupolice:verifpermis", {target}, "Accéder")
 		VMenu.AddFunc(98, "Donner contravention", "menupolice:donneramande", {}, "Accèder")
 		VMenu.AddFunc(98, "Fouiller le véhicule le plus près", "menupolice:searchveh", {}, "Accéder")
 		VMenu.AddFunc(98, "Fouiller le civil le plus près", "menupolice:searchciv", {}, "Accéder")
@@ -382,13 +383,13 @@ AddEventHandler("menupolice:f_verifp", function(name, tel, job, police, entrepri
 					-- DrawAdvancedText(0.874000000000001, 0.318, 0.005, 0.0028, 0.4, "~y~Métier: ~w~" ..job.. " - PDG", 255, 255, 255, 255, 6, 1)
 				-- end
 			-- DrawAdvancedText(0.874000000000001, 0.338, 0.005, 0.0028, 0.4, "~g~Permis de conduire (points): ~w~" ..permis, 255, 255, 255, 255, 6, 1)
-			if tonumber(permisArme) == 0 then
-				TriggerEvent("itinerance:notif", "~g~Permis de port d'armes: ~r~Non")
-			elseif tonumber(permisArme) == 1 then
-				TriggerEvent("itinerance:notif", "~g~Permis de port d'armes: ~g~Oui")
-			else
-				TriggerEvent("itinerance:notif", "~g~Permis de port d'armes: ~r~Erreur")
-			end
+			--if tonumber(permisArme) == 0 then
+				--TriggerEvent("itinerance:notif", "~g~Permis de port d'armes: ~r~Non")
+			--elseif tonumber(permisArme) == 1 then
+				--TriggerEvent("itinerance:notif", "~g~Permis de port d'armes: ~g~Oui")
+			--else
+				--TriggerEvent("itinerance:notif", "~g~Permis de port d'armes: ~r~Erreur")
+			--end
 			-- if permisArme == 0 then
 				-- DrawAdvancedText(0.874000000000001, 0.318, 0.005, 0.0028, 0.4, "~g~Permis de port d'armes: ~r~Non", 255, 255, 255, 255, 6, 1)
 			-- elseif permisArme == 1 then
@@ -407,6 +408,59 @@ AddEventHandler("menupolice:f_verifp", function(name, tel, job, police, entrepri
 		end
 end)
 
+RegisterNetEvent("menupolice:f_verifpermis")
+AddEventHandler("menupolice:f_verifpermis", function(target, permisv, permism, permisvel, permisc, permisb, permish, permisgun)
+	if tonumber(permisgun) == 1 then
+	   TriggerEvent("itinerance:notif", "Permis de port d'arme ~g~Validé")
+	elseif tonumber(permisgun) == 0 then
+	   TriggerEvent("itinerance:notif", "Permis de port d'arme ~r~ Non Validé")
+	else 
+	   TriggerEvent("itinerance:notif", "Permis de port d'arme ~r~ ERREUR")
+	end
+    if tonumber(permisv) == 1 then
+	    TriggerEvent("itinerance:notif", "Permis de conduire ~g~Validé")
+    elseif tonumber(permisv) == 0 then
+	    TriggerEvent("itinerance:notif", "Permis de conduire ~r~Non Validé")
+	else 
+	   TriggerEvent("itinerance:notif", "Permis de conduire ~r~ ERREUR")
+	end
+	if tonumber(permism) == 1 then
+	    TriggerEvent("itinerance:notif", "Permis de Moto ~g~Validé")
+    elseif tonumber(permism) == 0 then
+	    TriggerEvent("itinerance:notif", "Permis de Moto ~r~Non Validé")
+	else 
+	   TriggerEvent("itinerance:notif", "Permis de Moto ~r~ ERREUR")	
+	end
+	if tonumber(permisvel) == 1 then
+	    TriggerEvent("itinerance:notif", "Permis de Vélo ~g~Validé")
+    elseif tonumber(permisvel) == 0 then
+	    TriggerEvent("itinerance:notif", "Permis de Vélo ~r~Non Validé")
+	else 
+	   TriggerEvent("itinerance:notif", "Permis de Vélo ~r~ ERREUR")	
+    end
+    if tonumber(permisc) == 1 then
+	    TriggerEvent("itinerance:notif", "Permis de Poids Lourds ~g~Validé") 
+    elseif tonumber(permisc) == 0 then
+	    TriggerEvent("itinerance:notif", "Permis de Poids Lourds ~r~Non Validé") 
+	else 
+	   TriggerEvent("itinerance:notif", "Permis de Poids Lourds ~r~ ERREUR")	
+	end
+	if tonumber(permisb) == 1 then
+	    TriggerEvent("itinerance:notif", "Permis de Bateau ~g~Validé") 
+    elseif tonumber(permisb) == 0 then
+	    TriggerEvent("itinerance:notif", "Permis de Bateau ~r~Non Validé") 
+	else 
+	   TriggerEvent("itinerance:notif", "Permis de Bateau ~r~ ERREUR")		
+	end
+	if tonumber(permish) == 1 then
+	    TriggerEvent("itinerance:notif", "Permis d'hélicoptère ~g~Validé") 
+    elseif tonumber(permish) == 0 then
+	    TriggerEvent("itinerance:notif","Permis d'hélicoptère ~r~Non Validé")	
+    else 
+	   TriggerEvent("itinerance:notif", "Permis d'hélicoptère ~r~ ERREUR")		
+	end
+end)
+
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
@@ -415,6 +469,24 @@ Citizen.CreateThread(function()
 			showIdPolice = false
 		end
 	end
+end)
+
+function getPlayerID(source)
+	return getIdentifiant(GetPlayerIdentifiers(source))
+end
+
+function getIdentifiant(id)
+	for _, v in ipairs(id) do
+		return v
+	end
+end
+
+RegisterServerEvent("menupermis:getpermis_s")
+AddEventHandler("menupermis:getpermis_s", function()
+    local player = getPlayerID(source)
+	MySQL.Async.fetchAll("SELECT * FROM user_licence WHERE identifier = @name",{['@name'] = player}, function(result)
+	TriggerClientEvent("menupermis:f_getpermis", source, tonumber(result[1].permisv), tonumber(result[1].permism), tonumber(result[1].permisvel), tonumber(result[1].permisc), tonumber(result[1].permisb), tonumber(result[1].permish), tonumber(result[1].permisgun))
+	end)
 end)
 
 --megaphone = 0

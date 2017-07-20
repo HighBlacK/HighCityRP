@@ -87,16 +87,13 @@ TriggerEvent('es:getPlayerFromId', source, function(user)
     local prixavant = GetSolde(player)
     local prixajoute = ajout
     local prixtotal = prixavant+prixajoute
-     
     print(player)
     print(prixavant)
     print(prixajoute)
     print(prixtotal)
 
     updateCoffre(player,prixavant,prixtotal,prixajoute)
-
-    end
-end
+    end)
 end)
 
 

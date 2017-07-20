@@ -11,11 +11,10 @@ server_script {
 }
 
 server_script 'permis_server.lua'
-server_script 'weashop_server.lua'
 server_script 'menumedic_server.lua'
 
 --Non valides--
---Xserver_script 'publicfunds_server.lua'
+server_script 'publicfunds_server.lua'
 --Xserver_script 'alcool_server.lua'
 
 client_script {
@@ -40,7 +39,9 @@ client_script 'repairkit_client.lua'
 client_script 'vehicle_client.lua'
 client_script 'weashop_client.lua'
 client_script 'menumedic_client.lua'
+client_script 'illegalvendor_client.lua'
+client_script 'lockpick_client.lua'
 
 --Non valides--
---Xclient_script 'publicfunds_client.lua'
+client_script 'publicfunds_client.lua'
 --Xclient_script 'alcool_client.lua'

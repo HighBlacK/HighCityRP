@@ -115,3 +115,21 @@ AddEventHandler("ply_autoecole:Userlicenceh", function(permish)
 	permish = permish
 	MySQL.Async.fetchAll("UPDATE user_licence SET `permish`=@value WHERE identifier = @identifier", {['@value'] = permish, ['@identifier'] = user})
 end)
+
+RegisterServerEvent("ply_autoecole:moneyupdate")
+AddEventHandler("ply_autoecole:moneyupdate", function(money)
+    TriggerEvent('es:getPlayerFromId', source, function(user)
+	user:addMoney((money))
+	end)
+end)
+RegisterServerEvent("ply_autoecole:getCash_s")
+AddEventHandler("ply_autoecole:getCash_s", function()
+  TriggerEvent('es:getPlayerFromId', source, function(user)
+    if (user) then
+      local argent = user:getMoney()
+      TriggerClientEvent("ply_autoecole:f_getCash", source, argent)
+    else
+      TriggerEvent("es:desyncMsg")
+    end
+  end)
+end)

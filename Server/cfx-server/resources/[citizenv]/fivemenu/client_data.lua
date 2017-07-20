@@ -74,6 +74,8 @@ OutfitsShop = {
   {name="Vêtements", colour=9, scale=0.9, id=73, x= 72.531211853027, y= -1396.3240966797, z= 29.376146316528},
   {name="Vêtements", colour=9, scale=0.9, id=73, x= 617.532, y= 2765.06, z= 42.0881},
   {name="Vêtements", colour=9, scale=0.9, id=73, x= 121.748, y= -225.036, z= 54.5578},
+  {name="Vêtements", colour=9, scale=0.9, id=73, x= -3175.27, y= 1042.39, z= 20.8632},
+  {name="Vêtements", colour=9, scale=0.9, id=73, x= 425.967, y= -803.212, z= 29.4911},
 }
 
 BarberShop = {
@@ -103,6 +105,7 @@ Store = {
   {name="Epicerie", colour=0, scale=0.9, id=52, ['x'] = 2555.2375488281, ['y'] = 382.17391967773, ['z'] = 108.62296295166},
   {name="Epicerie", colour=0, scale=0.9, id=52, ['x'] = 547.994, ['y'] = 2669.43, ['z'] = 42.1565},
   {name="Epicerie", colour=0, scale=0.9, id=52, ['x'] = 1393.2, ['y'] = 3605.07, ['z'] = 34.9809}, -- Trevor's business
+  {name="Epicerie", colour=0, scale=0.9, id=52, ['x'] = -3244.08, ['y'] = 1001.42, ['z'] = 12.8307},
 }
 
 distributeur = {
@@ -178,7 +181,16 @@ boulangerie = {
 }
 
 weashop = {
-  {name="Ammunation", colour=5, id=403, ['x'] = 20.2597, ['y'] = -1106.28, ['z'] = 29.797}
+  {name="Ammunation", colour=5, id=403, ['x'] = 20.2597, ['y'] = -1106.28, ['z'] = 29.797},
+  {name="Ammunation", colour=5, id=403, ['x'] = 1692.379, ['y'] = 3758.194, ['z'] = 33.71},
+  {name="Ammunation", colour=5, id=403, ['x'] = 844.352, ['y'] = -1033.517, ['z'] = 28.194},
+  {name="Ammunation", colour=5, id=403, ['x'] = -331.487, ['y'] = 6082.348, ['z'] = 31.454},
+  {name="Ammunation", colour=5, id=403, ['x'] = -664.268, ['y'] = -935.479, ['z'] = 21.829},
+  {name="Ammunation", colour=5, id=403, ['x'] = -1305.427, ['y'] = -392.428, ['z'] = 36.695},
+  {name="Ammunation", colour=5, id=403, ['x'] = -1119.146, ['y'] = 2697.061, ['z'] = 18.554},
+  {name="Ammunation", colour=5, id=403, ['x'] = 2569.978, ['y'] = 294.472, ['z'] = 108.734},
+  {name="Ammunation", colour=5, id=403, ['x'] = -3172.584, ['y'] = 1085.858, ['z'] = 20.838},
+  {name="Ammunation", colour=5, id=403, ['x'] = 810.319, ['y'] = -2157.670, ['z'] = 29.619}
 }
 
 publicfunds = {
@@ -193,4 +205,8 @@ bars = {
 
 fisherman = {
   {name="Port de pêche", colour=5, id=403, ['x'] = 1296.563, ['y'] = -3238.787, ['z'] = 4.907}
+}
+
+illegalshop = {
+    {name= "Vendeur illégal", colour=1, id=403, ['x'] = 270.212, ['y'] = -1939.36, ['z'] = 24.8971}
 }

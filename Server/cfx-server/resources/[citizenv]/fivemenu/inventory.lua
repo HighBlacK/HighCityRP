@@ -71,9 +71,20 @@ inv_array_illegalrifles = {
 inv_array_illegalthrown = {
     {name="Gas BZ", id=82, price=8500, value=0},
     {name="Molotov", id=83, price=12000, value=0},
+}
+
+inv_array_thrownweapon = {
     {name="Extincteur", id=84, price=3000, value=0},
 	{name="Jerrican", id=85, price=8500, value=0},
     {name="Flare", id=86, price=12000, value=0},
+}
+
+inv_array_ammo = {
+    {name="Munitions", id=87, price=500, value=0},
+}
+
+inv_array_illegaltool = {
+    {name="Kit de crochetage", id=88, price=5000, value=0},
 }
 
 inv_array = {

@@ -25,7 +25,7 @@ AddEventHandler('paycheck:salary', function()
                         if salary_job > 0 then
                             user:addMoney((salary + salary_job))
                             TriggerClientEvent("citizenv:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Aide de L'État :  + " .. salary .. "~g~$~s~~n~Salaire reçu : + " .. salary_job+impot .. " ~g~$~s~~n~Cotisations et impôts: ~r~-" .. impot .. "~g~$~s~")
-							TriggerServerEvent('caisse_publique:ajoutsoldeext', impot-salary)
+							TriggerServerEvent('caisse_publique:ajoutsoldeext', impot)
                         end
                     end)
                 end

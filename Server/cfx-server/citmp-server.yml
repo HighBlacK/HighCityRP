@@ -23,7 +23,7 @@ AutoStartResources:
     - jobs-legal
     #- pooljob
     - es_garages
-    - es_weashop
+    #- es_weashop
     #- apartments
     - jobs-police
     - vdk_call
@@ -45,6 +45,10 @@ AutoStartResources:
     - delivery
     - lifetraffic
     - vehcontrol
+    - vehmenu
+    - antigang
+    - scoreboard
+    - notif
     - vehrecelor
     - repairkit
     - autoecole

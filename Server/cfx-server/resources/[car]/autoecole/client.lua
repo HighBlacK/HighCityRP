@@ -152,8 +152,10 @@ end)
 
 
 --[[Events]]--
-RegisterNetEvent("mine:f_getCash")
-AddEventHandler("mine:f_getCash", function(argent)
+ArgentJoueur = 0
+
+RegisterNetEvent("ply_autoecole:f_getCash")
+AddEventHandler("ply_autoecole:f_getCash", function(argent)
   ArgentJoueur = argent
 end)
 
@@ -268,6 +270,7 @@ AddEventHandler("ply_autoecole:StartPermisMotoTrue", function()
 	local permis_end_z = 128.911
 	local permis_plate ="AUTOTEST"
 	local permism = true
+	local epreuve = false
 	
 	Citizen.CreateThread(function()
 	 	Citizen.Wait(0)
@@ -276,36 +279,43 @@ AddEventHandler("ply_autoecole:StartPermisMotoTrue", function()
 		if DoesEntityExist(caisseo) then
 			drawNotification("~r~La zone est encombrée")		
 		else
-		    RequestModel(permis_vehicle)
-		    while not HasModelLoaded(permis_vehicle) do
-		    Citizen.Wait(0)
-			drawTxt("Chargement...",1, 2, 0.5, 0.9, 0.6, 255, 255, 255, 255)
-		    end
-		    veh = CreateVehicle(permis_vehicle, autoecole_location[1], autoecole_location[2], autoecole_location[3], 215.0, true, false)
-		    SetVehicleNumberPlateText(veh, permis_plate)
-		    SetVehicleOnGroundProperly(veh)
-		    SetVehicleHasBeenOwnedByPlayer(veh,true)
-		    local id = NetworkGetNetworkIdFromEntity(veh)
-		    SetNetworkIdCanMigrate(id, true)
-		    SetVehicleColours(veh, primarycolor, secondarycolor)
-		    SetVehicleExtraColours(veh, pearlescentcolor, wheelcolor)
-		    TaskWarpPedIntoVehicle(GetPlayerPed(-1),veh,-1)
-		    SetEntityInvincible(veh, false)
-		    drawNotification("Début de l'épreuve, rendez-vous à destination en respectant le code de la route")		   
+		    TriggerServerEvent("ply_autoecole:getCash_s")
+            Wait(200)
+			if ArgentJoueur >= 5000 then
+	    	    RequestModel(permis_vehicle)
+		        while not HasModelLoaded(permis_vehicle) do
+	    	    Citizen.Wait(0)
+	    		drawTxt("Chargement...",1, 2, 0.5, 0.9, 0.6, 255, 255, 255, 255)
+		        end
+	    	    veh = CreateVehicle(permis_vehicle, autoecole_location[1], autoecole_location[2], autoecole_location[3], 215.0, true, false)
+	    	    SetVehicleNumberPlateText(veh, permis_plate)
+	    	    SetVehicleOnGroundProperly(veh)
+	    	    SetVehicleHasBeenOwnedByPlayer(veh,true)
+	    	    local id = NetworkGetNetworkIdFromEntity(veh)
+	    	    SetNetworkIdCanMigrate(id, true)
+	    	    SetVehicleColours(veh, primarycolor, secondarycolor)
+	    	    SetVehicleExtraColours(veh, pearlescentcolor, wheelcolor)
+	    	    TaskWarpPedIntoVehicle(GetPlayerPed(-1),veh,-1)
+	    	    SetEntityInvincible(veh, false)
+	    	    drawNotification("Début de l'épreuve, rendez-vous à destination en respectant le code de la route")		
+                TriggerServerEvent("ply_autoecole:moneyupdate", -5000)
+				blipermis = AddBlipForCoord(permis_end_x,permis_end_y,permis_end_z)
+	            Citizen.CreateThread(function()		
+	         	    Wait(0)
+                    SetBlipSprite(blipermis, 1)
+                    SetBlipColour(blipermis, 2)
+                    SetBlipAsMissionCreatorBlip(blipermis,true)
+                    SetBlipRoute(blipermis, true)
+	            end)
+				epreuve = true
+			else
+			    drawNotification("~r~Vous n'avez pas assez d'argent")
+				epreuve = false
+            end				
 		end		
 	end)
 
-	local epreuve = true
-
-	blipermis = AddBlipForCoord(permis_end_x,permis_end_y,permis_end_z)
-	Citizen.CreateThread(function()		
-		Wait(0)
-        SetBlipSprite(blipermis, 1)
-        SetBlipColour(blipermis, 2)
-        SetBlipAsMissionCreatorBlip(blipermis,true)
-        SetBlipRoute(blipermis, true)
-	end)
-
+	
 	Citizen.CreateThread(function()
 		while true do
 			Wait(0)
@@ -329,9 +339,10 @@ AddEventHandler("ply_autoecole:StartPermisMotoTrue", function()
 							SetBlipAsMissionCreatorBlip(blipermis,false)
 							Citizen.InvokeNative(0x86A652570E5F25DD, Citizen.PointerValueIntInitialized(blipermis))
 						else							
-							drawNotification("~g~Epreuve réussie")
+							drawNotification("~g~Epreuve réussie, ~n~~w~L'Etat vous rembouse la moitiée de la somme engagée")
 							Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(vehicle))
 							TriggerServerEvent("ply_autoecole:Userlicencem", permism)
+							TriggerServerEvent("ply_autoecole:moneyupdate", 2500)	
 							epreuve = false
 							SetEntityAsNoLongerNeeded(blipermis)
 							SetBlipAsMissionCreatorBlip(blipermis,false)
@@ -442,6 +453,7 @@ AddEventHandler("ply_autoecole:StartPermisPoidslourdTrue", function()
 	local permis_end_z = 5.903
 	local permis_plate ="AUTOTEST"
 	local permisc = true
+	local epreuve = false
 	
 	Citizen.CreateThread(function()
 	 	Citizen.Wait(0)
@@ -450,34 +462,40 @@ AddEventHandler("ply_autoecole:StartPermisPoidslourdTrue", function()
 		if DoesEntityExist(caisseo) then
 			drawNotification("~r~La zone est encombrée")		
 		else
-		    RequestModel(permis_vehicle)
-		    while not HasModelLoaded(permis_vehicle) do
-		    Citizen.Wait(0)
-			drawTxt("Chargement...",1, 2, 0.5, 0.9, 0.6, 255, 255, 255, 255)
-		    end
-		    veh = CreateVehicle(permis_vehicle, autoecole_location[1], autoecole_location[2], autoecole_location[3], 215.0, true, false)
-		    SetVehicleNumberPlateText(veh, permis_plate)
-		    SetVehicleOnGroundProperly(veh)
-		    SetVehicleHasBeenOwnedByPlayer(veh,true)
-		    local id = NetworkGetNetworkIdFromEntity(veh)
-		    SetNetworkIdCanMigrate(id, true)
-		    SetVehicleColours(veh, primarycolor, secondarycolor)
-		    SetVehicleExtraColours(veh, pearlescentcolor, wheelcolor)
-		    TaskWarpPedIntoVehicle(GetPlayerPed(-1),veh,-1)
-		    SetEntityInvincible(veh, false)
-		    drawNotification("Début de l'épreuve, rendez-vous à destination en respectant le code de la route")		   
+		    TriggerServerEvent("ply_autoecole:getCash_s")
+            Wait(200)
+			if ArgentJoueur >= 10000 then
+		        RequestModel(permis_vehicle)
+    		    while not HasModelLoaded(permis_vehicle) do
+    		    Citizen.Wait(0)
+    			drawTxt("Chargement...",1, 2, 0.5, 0.9, 0.6, 255, 255, 255, 255)
+    		    end
+    		    veh = CreateVehicle(permis_vehicle, autoecole_location[1], autoecole_location[2], autoecole_location[3], 215.0, true, false)
+    		    SetVehicleNumberPlateText(veh, permis_plate)
+    		    SetVehicleOnGroundProperly(veh)
+    		    SetVehicleHasBeenOwnedByPlayer(veh,true)
+    		    local id = NetworkGetNetworkIdFromEntity(veh)
+    		    SetNetworkIdCanMigrate(id, true)
+    		    SetVehicleColours(veh, primarycolor, secondarycolor)
+    		    SetVehicleExtraColours(veh, pearlescentcolor, wheelcolor)
+    		    TaskWarpPedIntoVehicle(GetPlayerPed(-1),veh,-1)
+    		    SetEntityInvincible(veh, false)
+    		    drawNotification("Début de l'épreuve, rendez-vous à destination en respectant le code de la route")		
+                TriggerServerEvent("ply_autoecole:moneyupdate", -10000)	
+    	        blipermis = AddBlipForCoord(permis_end_x,permis_end_y,permis_end_z)
+    	        Citizen.CreateThread(function()		
+    		        Wait(0)
+                    SetBlipSprite(blipermis, 1)
+                    SetBlipColour(blipermis, 2)
+                    SetBlipAsMissionCreatorBlip(blipermis,true)
+                    SetBlipRoute(blipermis, true)
+	            end)
+				epreuve = true
+			else
+			    drawNotification("~r~Vous n'avez pas assez d'argent")
+				epreuve = false
+            end						
 		end		
-	end)
-
-	local epreuve = true
-
-	blipermis = AddBlipForCoord(permis_end_x,permis_end_y,permis_end_z)
-	Citizen.CreateThread(function()		
-		Wait(0)
-        SetBlipSprite(blipermis, 1)
-        SetBlipColour(blipermis, 2)
-        SetBlipAsMissionCreatorBlip(blipermis,true)
-        SetBlipRoute(blipermis, true)
 	end)
 
 	Citizen.CreateThread(function()
@@ -503,9 +521,10 @@ AddEventHandler("ply_autoecole:StartPermisPoidslourdTrue", function()
 							SetBlipAsMissionCreatorBlip(blipermis,false)
 							Citizen.InvokeNative(0x86A652570E5F25DD, Citizen.PointerValueIntInitialized(blipermis))
 						else							
-							drawNotification("~g~Epreuve réussie")
+							drawNotification("~g~Epreuve réussie, ~n~~w~L'Etat vous rembouse la moitiée de la somme engagée")
 							Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(vehicle))
 							TriggerServerEvent("ply_autoecole:Userlicencec", permisc)
+							TriggerServerEvent("ply_autoecole:moneyupdate", 5000)
 							epreuve = false
 							SetEntityAsNoLongerNeeded(blipermis)
 							SetBlipAsMissionCreatorBlip(blipermis,false)
@@ -529,6 +548,7 @@ AddEventHandler("ply_autoecole:StartPermisHeliTrue", function()
 	local permis_end_z = 42.1344
 	local permis_plate ="AUTOTEST"
 	local permish = true
+	local epreuve = false
 	
 	Citizen.CreateThread(function()
 	 	Citizen.Wait(0)
@@ -537,34 +557,40 @@ AddEventHandler("ply_autoecole:StartPermisHeliTrue", function()
 		if DoesEntityExist(caisseo) then
 			drawNotification("~r~La zone est encombrée")		
 		else
-		    RequestModel(permis_vehicle)
-		    while not HasModelLoaded(permis_vehicle) do
-		    Citizen.Wait(0)
-			drawTxt("Chargement...",1, 2, 0.5, 0.9, 0.6, 255, 255, 255, 255)
-		    end
-		    veh = CreateVehicle(permis_vehicle, -725.271, -1444.27, 5.00052, 215.0, true, false)
-		    SetVehicleNumberPlateText(veh, permis_plate)
-		    SetVehicleOnGroundProperly(veh)
-		    SetVehicleHasBeenOwnedByPlayer(veh,true)
-		    local id = NetworkGetNetworkIdFromEntity(veh)
-		    SetNetworkIdCanMigrate(id, true)
-		    SetVehicleColours(veh, primarycolor, secondarycolor)
-		    SetVehicleExtraColours(veh, pearlescentcolor, wheelcolor)
-		    TaskWarpPedIntoVehicle(GetPlayerPed(-1),veh,-1)
-		    SetEntityInvincible(veh, false)
-		    drawNotification("Début de l'épreuve, rendez-vous à destination")		   
+		    TriggerServerEvent("ply_autoecole:getCash_s")
+            Wait(200)
+			if ArgentJoueur >= 50000 then
+			    RequestModel(permis_vehicle)
+			    while not HasModelLoaded(permis_vehicle) do
+			    Citizen.Wait(0)
+				drawTxt("Chargement...",1, 2, 0.5, 0.9, 0.6, 255, 255, 255, 255)
+			    end
+			    veh = CreateVehicle(permis_vehicle, -725.271, -1444.27, 5.00052, 215.0, true, false)
+			    SetVehicleNumberPlateText(veh, permis_plate)
+			    SetVehicleOnGroundProperly(veh)
+			    SetVehicleHasBeenOwnedByPlayer(veh,true)
+			    local id = NetworkGetNetworkIdFromEntity(veh)
+			    SetNetworkIdCanMigrate(id, true)
+			    SetVehicleColours(veh, primarycolor, secondarycolor)
+			    SetVehicleExtraColours(veh, pearlescentcolor, wheelcolor)
+			    TaskWarpPedIntoVehicle(GetPlayerPed(-1),veh,-1)
+			    SetEntityInvincible(veh, false)
+			    drawNotification("Début de l'épreuve, rendez-vous à destination")
+				TriggerServerEvent("ply_autoecole:moneyupdate", -50000)
+	            blipermis = AddBlipForCoord(permis_end_x,permis_end_y,permis_end_z)
+	            Citizen.CreateThread(function()		
+            		Wait(0)
+                    SetBlipSprite(blipermis, 1)
+                    SetBlipColour(blipermis, 2)
+                    SetBlipAsMissionCreatorBlip(blipermis,true)
+                    SetBlipRoute(blipermis, true)
+	            end)
+				epreuve = true
+			else
+			    drawNotification("~r~Vous n'avez pas assez d'argent")
+				epreuve = false
+            end	
 		end		
-	end)
-
-	local epreuve = true
-
-	blipermis = AddBlipForCoord(permis_end_x,permis_end_y,permis_end_z)
-	Citizen.CreateThread(function()		
-		Wait(0)
-        SetBlipSprite(blipermis, 1)
-        SetBlipColour(blipermis, 2)
-        SetBlipAsMissionCreatorBlip(blipermis,true)
-        SetBlipRoute(blipermis, true)
 	end)
 
 	Citizen.CreateThread(function()
@@ -590,9 +616,10 @@ AddEventHandler("ply_autoecole:StartPermisHeliTrue", function()
 							SetBlipAsMissionCreatorBlip(blipermis,false)
 							Citizen.InvokeNative(0x86A652570E5F25DD, Citizen.PointerValueIntInitialized(blipermis))
 						else							
-							drawNotification("~g~Epreuve réussie")
+							drawNotification("~g~Epreuve réussie, ~n~~w~L'Etat vous rembouse la moitiée de la somme engagée")
 							Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(vehicle))
 							TriggerServerEvent("ply_autoecole:Userlicenceh", permish)
+							TriggerServerEvent("ply_autoecole:moneyupdate", 25000)
 							epreuve = false
 							SetEntityAsNoLongerNeeded(blipermis)
 							SetBlipAsMissionCreatorBlip(blipermis,false)
@@ -616,6 +643,7 @@ AddEventHandler("ply_autoecole:StartPermisBoatTrue", function()
 	local permis_end_z = -0.167121
 	local permis_plate ="AUTOTEST"
 	local permisb = true
+	local epreuve = false
 	
 	Citizen.CreateThread(function()
 	 	Citizen.Wait(0)
@@ -624,34 +652,40 @@ AddEventHandler("ply_autoecole:StartPermisBoatTrue", function()
 		if DoesEntityExist(caisseo) then
 			drawNotification("~r~La zone est encombrée")		
 		else
-		    RequestModel(permis_vehicle)
-		    while not HasModelLoaded(permis_vehicle) do
-		    Citizen.Wait(0)
-			drawTxt("Chargement...",1, 2, 0.5, 0.9, 0.6, 255, 255, 255, 255)
-		    end
-		    veh = CreateVehicle(permis_vehicle, -936.327, -1466.56, -0.472946, 215.0, true, false)
-		    SetVehicleNumberPlateText(veh, permis_plate)
-		    SetVehicleOnGroundProperly(veh)
-		    SetVehicleHasBeenOwnedByPlayer(veh,true)
-		    local id = NetworkGetNetworkIdFromEntity(veh)
-		    SetNetworkIdCanMigrate(id, true)
-		    SetVehicleColours(veh, primarycolor, secondarycolor)
-		    SetVehicleExtraColours(veh, pearlescentcolor, wheelcolor)
-		    TaskWarpPedIntoVehicle(GetPlayerPed(-1),veh,-1)
-		    SetEntityInvincible(veh, false)
-		    drawNotification("Début de l'épreuve, rendez-vous à destination")		   
+		    TriggerServerEvent("ply_autoecole:getCash_s")
+            Wait(200)
+			if ArgentJoueur >= 50000 then
+			    RequestModel(permis_vehicle)
+			    while not HasModelLoaded(permis_vehicle) do
+			    Citizen.Wait(0)
+				drawTxt("Chargement...",1, 2, 0.5, 0.9, 0.6, 255, 255, 255, 255)
+			    end
+			    veh = CreateVehicle(permis_vehicle, -936.327, -1466.56, -0.472946, 215.0, true, false)
+			    SetVehicleNumberPlateText(veh, permis_plate)
+			    SetVehicleOnGroundProperly(veh)
+			    SetVehicleHasBeenOwnedByPlayer(veh,true)
+			    local id = NetworkGetNetworkIdFromEntity(veh)
+			    SetNetworkIdCanMigrate(id, true)
+			    SetVehicleColours(veh, primarycolor, secondarycolor)
+			    SetVehicleExtraColours(veh, pearlescentcolor, wheelcolor)
+			    TaskWarpPedIntoVehicle(GetPlayerPed(-1),veh,-1)
+			    SetEntityInvincible(veh, false)
+			    drawNotification("Début de l'épreuve, rendez-vous à destination")
+				TriggerServerEvent("ply_autoecole:moneyupdate", -50000)
+	            blipermis = AddBlipForCoord(permis_end_x,permis_end_y,permis_end_z)
+		            Citizen.CreateThread(function()		
+			            Wait(0)
+        	            SetBlipSprite(blipermis, 1)
+        	            SetBlipColour(blipermis, 2)
+        	            SetBlipAsMissionCreatorBlip(blipermis,true)
+        	            SetBlipRoute(blipermis, true)
+		            end)
+				epreuve = true
+			else
+			    drawNotification("~r~Vous n'avez pas assez d'argent")
+				epreuve = false
+            end						
 		end		
-	end)
-
-	local epreuve = true
-
-	blipermis = AddBlipForCoord(permis_end_x,permis_end_y,permis_end_z)
-	Citizen.CreateThread(function()		
-		Wait(0)
-        SetBlipSprite(blipermis, 1)
-        SetBlipColour(blipermis, 2)
-        SetBlipAsMissionCreatorBlip(blipermis,true)
-        SetBlipRoute(blipermis, true)
 	end)
 
 	Citizen.CreateThread(function()
@@ -677,9 +711,10 @@ AddEventHandler("ply_autoecole:StartPermisBoatTrue", function()
 							SetBlipAsMissionCreatorBlip(blipermis,false)
 							Citizen.InvokeNative(0x86A652570E5F25DD, Citizen.PointerValueIntInitialized(blipermis))
 						else							
-							drawNotification("~g~Epreuve réussie")
+							drawNotification("~g~Epreuve réussie, ~n~~w~L'Etat vous rembouse la moitiée de la somme engagée")
 							Citizen.InvokeNative(0xEA386986E786A54F, Citizen.PointerValueIntInitialized(vehicle))
 							TriggerServerEvent("ply_autoecole:Userlicenceb", permisb)
+							TriggerServerEvent("ply_autoecole:moneyupdate", 25000)
 							epreuve = false
 							SetEntityAsNoLongerNeeded(blipermis)
 							SetBlipAsMissionCreatorBlip(blipermis,false)

@@ -30,7 +30,7 @@ AddEventHandler("inventory:giveItem_s", function(netID, id, name, quantity)
 		TriggerClientEvent("player:looseItem", source, id, quantity)
 		TriggerClientEvent("inventory:giveItem_f", netID, id, quantity)
 		TriggerClientEvent("itinerance:notif", source, "Vous avez donné ~g~" .. quantity .. " " ..name.. "~w~.")
-		TriggerEvent("vmenu:MainMenuOG", source)
+		TriggerClientEvent("inventory:menuItem", source, target, id, name, tonumber(quantity)-1)
 		TriggerClientEvent("itinerance:notif", netID, "Vous avez reçu ~g~" .. quantity .. " " ..name.. "~w~.")
 	end
   end)
@@ -93,7 +93,7 @@ AddEventHandler("inventory:updateQuantity_s", function(qty, id, iprice, name)
         TriggerClientEvent("citizenv:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Vous avez acheté : ~g~".. name)
         CancelEvent()
       else
-        TriggerClientEvent("citizenv:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Vous n'avez pas assez d'argent!")
+        TriggerClientEvent("citizenv:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "~r~Vous n'avez pas assez d'argent!")
         CancelEvent()
       end
     else
@@ -124,7 +124,7 @@ AddEventHandler("inventory:checkMoney", function(iprice)
         TriggerClientEvent("inventory:MoneyOk", source, true)
       else
         TriggerClientEvent("inventory:MoneyOk", source, false)
-        TriggerClientEvent("citizenv:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Vous n'avez pas assez d'argent!")
+        TriggerClientEvent("citizenv:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "~r~Vous n'avez pas assez d'argent!")
         CancelEvent()
       end
     else
@@ -143,7 +143,7 @@ AddEventHandler("inventory:checkMoneyDistrib", function(iprice)
         user:removeMoney((rounded))
       else
         TriggerClientEvent("inventory:MoneyOk", source, false)
-        TriggerClientEvent("citizenv:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "Vous n'avez pas assez d'argent!")
+        TriggerClientEvent("citizenv:notify", source, "CHAR_BANK_MAZE", 1, "Maze Bank", false, "~r~Vous n'avez pas assez d'argent!")
         CancelEvent()
       end
     else

@@ -283,7 +283,7 @@ function VMenu.DrawItems(td)
 		if VMenu.items[curMenu][i].type == "affiche" then
 			VMenu.DrawText(""..itemTitle.."", VMenu.left + (VMenu.width / 2), VMenu.top + VMenu.HdHeight + 0.050 + (VMenu.offsetY * (i-1-VMenu.scroll)), 0.45, 0.45, 6, false, false, true, false, 255, 255, 255, 255)
 		elseif VMenu.items[curMenu][i].type == "afficheA" then
-			VMenu.DrawText(""..itemTitle.."", VMenu.left + (VMenu.width / 2), VMenu.top + VMenu.HdHeight + 0.050 + (VMenu.offsetY * (i-1-VMenu.scroll)), 0.45, 0.45, 1, false, false, false, false, 255, 255, 255, 255)
+			VMenu.DrawText(""..itemTitle.."", VMenu.TextX, VMenu.top + VMenu.HdHeight + 0.050 + (VMenu.offsetY * (i-1-VMenu.scroll)), 0.50, 0.50, 1, false, true, false, false, 255, 255, 255, 255)
 		elseif VMenu.items[curMenu][i].type == "separator" then
 			VMenu.DrawText("- "..itemTitle.." -", VMenu.left + (VMenu.width / 2), VMenu.top + VMenu.HdHeight + 0.050 + (VMenu.offsetY * (i-1-VMenu.scroll)), 0.50, 0.50, 1, false, false, true, false, 255, 255, 255, 255)
 		elseif i == curItem then
@@ -1052,6 +1052,8 @@ function Construct()
 
 	local menu = 8
 	VMenu.AddMenu(menu, "Tenues", "cloth") -- default = Header "Texte" sur fond bleu
+	VMenu.AddTxTA(menu, "Bonjour, quelle tenue vous interesse?")
+	VMenu.AddTxT(menu, "")
 	if User.gender == "mp_m_freemode_01" then
 		VMenu.AddNum(8, "Catégorie", "Tenues", 0, 65, "Changer de catégorie")
 	else
@@ -1062,6 +1064,8 @@ function Construct()
 
 	local menu = 9
 	VMenu.AddMenu(menu, "", "barber") -- default = Header "Texte" sur fond bleu
+	VMenu.AddTxTA(menu, "Quelle coupe souhaitez-vous?")
+	VMenu.AddTxT(menu, "")
 	VMenu.AddNum(menu, "Coiffure", "Hair", 0, 22, "Changer la coiffure")
 	VMenu.AddNum(menu, "Coiffure secondaire", "HairSec", 0, 6, "Changer la coiffure")
 	VMenu.AddNum(menu, "Couleur", "HairColor", 0, 10, "Changer la couleur des cheveux")
@@ -1070,12 +1074,16 @@ function Construct()
 
 	local menu = 10
 	VMenu.AddMenu(menu, "", "hopital") -- default = Header "Texte" sur fond bleu
+	VMenu.AddTxTA(menu, "Nos médecins sont hautement qualifiés")
+	VMenu.AddTxT(menu, "")
 	VMenu.AddNum(menu, "Sexe", "Sexe", 0, 1, "Changer de sexe")
 	VMenu.AddNum(menu, "Face", "Face", 0, 45, "Changer de face")
 	VMenu.AddFunc(menu, "Valider", "vmenu:getclientFace", {getOpt("Sexe"),getOpt("Face"),0}, "Obtenir ce changement")
 
 	local menu = 11
 	VMenu.AddMenu(menu, "", "epicerie")
+	VMenu.AddTxTA(menu, "Bonjour, que désirez-vous acheter?")
+	VMenu.AddTxT(menu, "")
 	VMenu.AddNum(menu, "Quantité", "itemBuy", 1, 30, "Sélection")
 	for _, item in pairs(inv_array_legal) do
 		VMenu.AddFunc(menu, item.name, "inventory:buy", {getOpt("itemBuy"), item.id, item.price, item.name}, "Prix: " .. item.price .. "$")
@@ -1098,6 +1106,8 @@ function Construct()
 
 	local menu = 15
 	VMenu.AddMenu(menu, "", "emploi")
+	VMenu.AddTxTA(menu, "Nous avons un large panel d'offres d'emploi.")
+	VMenu.AddTxT(menu, "")
 	for _, item in pairs(jobs) do
 		VMenu.AddFunc(menu, item.name, "vmenu:poleemploi", {item.id}, "Valider")
 	end
@@ -1143,6 +1153,8 @@ function Construct()
 
 	local menu = 19
 	VMenu.AddMenu(menu, "", "autoecole")
+	VMenu.AddTxTA(menu, "Bonjour, vous voulez passez quelle épreuve?")
+	VMenu.AddTxT(menu, "")
 	VMenu.AddFunc(menu, "Fermer", "vmenu:closeMenu", {}, "Fermer le menu")
 	VMenu.AddFunc(menu, "Permis Voiture", "ply_autoecole:StartPermisVoitureTrue", {}, "Gratuit")
 	VMenu.AddFunc(menu, "Permis Moto", "ply_autoecole:StartPermisMotoTrue", {}, "Prix: 5000$")
@@ -1153,6 +1165,8 @@ function Construct()
 	
     local menu = 20
 	VMenu.AddMenu(menu, "", "boulangerie")
+	VMenu.AddTxTA(menu, "C'est tout chaud sorti du four, bon appétit")
+	VMenu.AddTxT(menu, "")
 	VMenu.AddNum(menu, "Quantité", "itemBuy", 1, 30, "Sélection")
 	for _, item in pairs(inv_array_boulangerie) do
 		VMenu.AddFunc(menu, item.name, "inventory:buy", {getOpt("itemBuy"), item.id, item.price, item.name}, "Prix: " .. item.price .. "$")
@@ -1171,9 +1185,24 @@ function Construct()
 	
 	local menu = 22
 	VMenu.AddMenu(menu,"","armurerie")
+	VMenu.AddTxTA(menu, "Ici on a tout ce qu'il te faut!")
+	VMenu.AddTxT(menu, "")
 	VMenu.AddFunc(menu, "Fermer", "vmenu:closeMenu", {}, "Fermer le menu")
-	VMenu.AddFunc(menu, "Armes Blanches", "menuweashop:melee", {}, "Accéder")
-	VMenu.AddFunc(menu, "Pistolets", "menuweashop:pistol", {}, "Accéder")
+	VMenu.AddTxT(menu, "")
+	VMenu.AddNum(menu, "Quantité", "itemBuy", 1, 30, "Sélection")
+	for _, item in pairs(inv_array_ammo) do
+		VMenu.AddFunc(menu, item.name, "inventory:buy", {getOpt("itemBuy"), item.id, item.price, item.name}, "Prix: " .. item.price .. "$")
+	end
+	VMenu.AddTxT(menu, "")
+	VMenu.AddTxT(menu, "Armes Blanches")
+	for _, item in pairs(inv_array_meleeweapon) do
+		VMenu.AddFunc(menu, item.name, "inventory:buy", {1, item.id, item.price, item.name}, "Prix: " .. item.price .. "$")
+	end
+	VMenu.AddTxT(menu, "")
+	VMenu.AddTxT(menu, "Pistolets")
+	for _, item in pairs(inv_array_pistolweapon) do
+		VMenu.AddFunc(menu, item.name, "inventory:buy", {1, item.id, item.price, item.name}, "Prix: " .. item.price .. "$")
+	end
 	
 	local menu = 23
 	VMenu.AddMenu(menu, "", "publicfunds")
@@ -1183,6 +1212,8 @@ function Construct()
 	
 	local menu = 24
 	VMenu.AddMenu(menu, "", "default")
+	VMenu.AddTxTA(menu, "Bonjour, tu veut boire quoi?")
+	VMenu.AddTxT(menu, "")
 	VMenu.AddNum(menu, "Quantité", "itemBuy", 1, 30, "Sélection")
 	for _, item in pairs(inv_array_alcool) do
 		VMenu.AddFunc(menu, item.name, "inventory:buy", {getOpt("itemBuy"), item.id, item.price, item.name}, "Prix: " .. item.price .. "$")
@@ -1194,19 +1225,38 @@ function Construct()
 	
 	local menu = 26
 	VMenu.AddMenu(menu, "", "default")
+	VMenu.AddTxTA(menu, "T'as du fric? J'ai tes infos!")
+	VMenu.AddTxT(menu, "")
 	VMenu.AddFunc(menu, "Acheter des informations", "menudrogue:info_weed", {0}, "Acheter")
 	
 	local menu = 27
 	VMenu.AddMenu(menu, "", "default")
+	VMenu.AddTxTA(menu, "T'as du fric? J'ai tes infos!")
+	VMenu.AddTxT(menu, "")
 	VMenu.AddFunc(menu, "Acheter des informations", "menudrogue:info_coke", {0}, "Acheter")
 
 	local menu = 28
 	VMenu.AddMenu(menu, "", "default")
+	VMenu.AddTxTA(menu, "T'as du fric? J'ai tes infos!")
+	VMenu.AddTxT(menu, "")
 	VMenu.AddFunc(menu, "Acheter des informations", "menudrogue:info_meth", {0}, "Acheter")
 
 	local menu = 29
 	VMenu.AddMenu(menu, "", "default")
+	VMenu.AddTxTA(menu, "T'as du fric? J'ai tes infos!")
+	VMenu.AddTxT(menu, "")
 	VMenu.AddFunc(menu, "Acheter des informations", "menudrogue:info_organe", {0}, "Acheter")
+	
+	local menu = 30
+	VMenu.AddMenu(menu, "", "default")
+	VMenu.AddTxTA(menu, "Mes produits sont introuvables dans le marché")
+	VMenu.AddTxT(menu, "")
+	VMenu.AddFunc(menu, "Armes illégales", "illegalvendor:weapon", {}, "Accéder")
+	VMenu.AddTxT(menu, "")
+	VMenu.AddNum(menu, "Quantité", "itemBuy", 1, 30, "Sélection")
+	for _, item in pairs(inv_array_illegaltool) do
+		VMenu.AddFunc(menu, item.name, "inventory:buy", {getOpt("itemBuy"), item.id, item.price, item.name}, "Prix: " .. item.price .. "$")
+	end
 
 	------- MAIN MENU F7
 	local menu = 98
@@ -1250,7 +1300,7 @@ function getMainMenu()
 		end
 		VMenu.AddTxT(98,"")
 		VMenu.AddFunc(98, "~b~Sauvegarder ma position", "vmenu:sync", {}, lang.common.access)
-		VMenu.AddFunc(98, "Annimations", "menuanim:AnimOG", {}, lang.common.access)
+		VMenu.AddFunc(98, "Animations", "menuanim:AnimOG", {}, lang.common.access)
 		--VMenu.AddFunc(98, "Téléphone", "menutel:PhoneOG", {User.telephone}, lang.common.access)
 		VMenu.AddFunc(98, "Voir les permis", "menupermis:Permis", {User.permis}, lang.common.access)
 		--VMenu.AddFunc(98, "Voir les clées", "menukeys:keys", {}, lang.common.access)
@@ -1258,8 +1308,6 @@ function getMainMenu()
 		VMenu.AddFunc(98, "Donnez de l'argent sale", "vmenu:giveDCash", {User.dirtymoney}, lang.common.access)
 		VMenu.AddTxT(98,"")
 		VMenu.AddTxT(98, "Inventaire")
-		--VMenu.AddTxT(98,"")
-		--VMenu.AddFunc(98, "~r~Lacher des objets", "inventory:removemenu", {}, lang.common.access)
 		for ind, value in ipairs(ITEMS) do
 			if value.quantity > 0 then
 				VMenu.AddFunc(98, tostring(value.libelle), "inventory:menuItem", {ind, tostring(value.libelle), tostring(value.quantity)}, lang.menu.mainmenu.quantity .. tostring(value.quantity))
@@ -1555,6 +1603,12 @@ Citizen.CreateThread(function()
 				for _, item in pairs(inv_array_alcool) do
 					VMenu.EditFunc(24, item.name, "inventory:buy", {getOpt("itemBuy"), item.id, item.price, item.name}, "Prix: " .. getOpt("itemBuy")*item.price .. "$")
 				end
+				for _, item in pairs(inv_array_ammo) do
+		            VMenu.EditFunc(22, item.name, "inventory:buy", {getOpt("itemBuy"), item.id, item.price, item.name}, "Prix: " .. getOpt("itemBuy")*item.price .. "$")
+	            end
+				for _, item in pairs(inv_array_illegaltool) do
+            		VMenu.EditFunc(30, item.name, "inventory:buy", {getOpt("itemBuy"), item.id, item.price, item.name}, "Prix: " .. getOpt("itemBuy")*item.price .. "$")
+	            end
 			end
 
 			if VMenu.police then
@@ -1953,6 +2007,8 @@ Citizen.CreateThread(function()
 
 		elseif (IsNearPoints(changeYourJob, 3) == true) then
 
+		elseif (IsNearPoints(illegalshop, 3) == true) then
+		
 		elseif (IsNearPoints(Tanker_company, 3) == true) then
 			VMenu.Tanker_company = true
 		elseif (IsNearPoints(Container_company, 3) == true) then
@@ -2178,6 +2234,8 @@ Citizen.CreateThread(function()
 				TriggerEvent("vmenu:openMenu", 29)
 			elseif (IsNearPoints(changeYourJob, 5) == true) then
 				TriggerEvent("vmenu:openMenu", 15)
+			elseif (IsNearPoints(illegalshop, 3) == true) then
+			    TriggerEvent("vmenu:openMenu", 30)
 			elseif (IsNearPoints(lavage_argent, 3) == true) then
 				TriggerEvent("vmenu:openMenu", 16)
 			elseif (IsNearPoints(JailPolice, 1) == true) then
@@ -2229,6 +2287,8 @@ Citizen.CreateThread(function()
 			VMenu.Info("Appuyer sur ~INPUT_CONTEXT~ pour parler avec l'informateur", false)
 		elseif (IsNearPoints(changeYourJob, 5) == true) then
 			VMenu.Info("Appuyer sur ~INPUT_CONTEXT~ pour accéder au pole emploi", false)
+		elseif (IsNearPoints(illegalshop, 3) == true) then
+			VMenu.Info("Appuyer sur ~INPUT_CONTEXT~ pour parler au vendeur illégal", false)
 		elseif (IsNearPoints(Tanker_company, 4) == true and User.job == 6) then
 			VMenu.TankerCompany = false
 			VMenu.Info('Appuyer sur ~INPUT_CONTEXT~ pour accéder à la compagnie de livraison', false)
@@ -2256,7 +2316,7 @@ Citizen.CreateThread(function()
 		elseif (IsNearPoints(lavage_argent, 3) == true) then
 			VMenu.Info('Appuyer sur ~INPUT_CONTEXT~ pour laver votre argent sale', false)
 		elseif (IsNearPoints(JailPolice, 1) == true) then
-			VMenu.Info('Appuyer sur ~~INPUT_CONTEXT~ pour accéder au controle des cellules', false)
+			VMenu.Info('Appuyer sur ~INPUT_CONTEXT~ pour accéder au controle des cellules', false)
 	    elseif (IsNearPoints(autoecole, 4) == true) then
 		    VMenu.Info("Appuyer sur ~INPUT_CONTEXT~ pour accéder à l'auto-école", false)
 		elseif (IsNearPoints(boulangerie, 4) == true) then

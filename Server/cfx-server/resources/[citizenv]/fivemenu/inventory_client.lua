@@ -119,190 +119,218 @@ end)
 
 RegisterNetEvent("inventory:menuItem")
 AddEventHandler("inventory:menuItem", function(target, id, name, quantity)
-    VMenu.inventory = true
-    VMenu.ResetMenu(98, "", "default")
-    Wait(100)
-	if id == 1 then
-        VMenu.AddTxT(98,"~y~Bouteille d'eau")
-	elseif id == 2 then
-        VMenu.AddTxT(98,"~y~Sandwich")
-	elseif id == 3 then
-        VMenu.AddTxT(98,"~y~Poulet Roti")
-	elseif id == 4 then
-        VMenu.AddTxT(98,"~r~Chanvre")
-	elseif id == 5 then
-        VMenu.AddTxT(98,"~r~Cannabis roulé")
-	elseif id == 6 then
-        VMenu.AddTxT(98,"~r~Feuille de coka")
-	elseif id == 7 then
-        VMenu.AddTxT(98,"~r~Coka")
-	elseif id == 8 then
-        VMenu.AddTxT(98,"~r~Coka")
-	elseif id == 9 then
-        VMenu.AddTxT(98,"~r~Ephedrine")
-	elseif id == 10 then
-        VMenu.AddTxT(98,"~r~Matière illégale")
-	elseif id == 11 then
-        VMenu.AddTxT(98,"~r~Matière illégale")
-	elseif id == 12 then
-        VMenu.AddTxT(98,"~r~Meth")
-	elseif id == 13 then
-        VMenu.AddTxT(98,"~r~Organe")
-	elseif id == 14 then
-        VMenu.AddTxT(98,"~r~Organe Emballé")
-	elseif id == 15 then
-        VMenu.AddTxT(98,"~r~Organe Analysé")
-	elseif id == 16 then
-        VMenu.AddTxT(98,"~r~Organe Livrable")
-	elseif id == 17 then
-        VMenu.AddTxT(98,"~g~Cuivre")
-	elseif id == 18 then
-        VMenu.AddTxT(98,"~g~Fer")
-	elseif id == 19 then
-        VMenu.AddTxT(98,"~g~Diamants")
-	elseif id == 20 then
-        VMenu.AddTxT(98,"~g~Cables")
-	elseif id == 21 then
-        VMenu.AddTxT(98,"~g~~g~Fil de fer")
-	elseif id == 22 then
-        VMenu.AddTxT(98,"~g~Diamants taillés")
-	elseif id == 23 then
-        VMenu.AddTxT(98,"~g~Roche")
-	elseif id == 24 then
-        VMenu.AddTxT(98,"~g~Décoration")
-	elseif id == 25 then
-        VMenu.AddTxT(98,"~g~Poisson")
-	elseif id == 26 then
-        VMenu.AddTxT(98,"~g~Corps")
-	elseif id == 27 then
-        VMenu.AddTxT(98,"~g~Corps traité")
-	elseif id == 28 then
-        VMenu.AddTxT(98,"~y~Soda")
-	elseif id == 29 then
-        VMenu.AddTxT(98,"~y~Soupe de légumes BIO")
-	elseif id == 30 then
-        VMenu.AddTxT(98,"~y~Tarte aux fraises")
-	elseif id == 31 then
-        VMenu.AddTxT(98,"~y~Café")
-	elseif id == 32 then
-        VMenu.AddTxT(98,"~y~Pizza")
-	elseif id == 33 then
-        VMenu.AddTxT(98,"~y~Filet de thon")
-	elseif id == 34 then
-        VMenu.AddTxT(98,"~g~Carotte")
-	elseif id == 35 then
-        VMenu.AddTxT(98,"~g~Carotte rapée")
-	elseif id == 36 then
-        VMenu.AddTxT(98,"~g~Pomme de terre")
-	elseif id == 37 then
-        VMenu.AddTxT(98,"~g~Purée")
-	elseif id == 38 then
-        VMenu.AddTxT(98,"~g~Tomate")
-	elseif id == 39 then
-        VMenu.AddTxT(98,"~g~Concentré de tomate")
-	elseif id == 40 then
-        VMenu.AddTxT(98,"~g~Blé")
-	elseif id == 41 then
-        VMenu.AddTxT(98,"~g~Pain")
-	elseif id == 42 then
-        VMenu.AddTxT(98,"~y~Pain")
-	elseif id == 43 then
-        VMenu.AddTxT(98,"~y~Croissant")
-	elseif id == 44 then
-        VMenu.AddTxT(98,"~y~Chocolatine")
-	elseif id == 45 then
-        VMenu.AddTxT(98,"~y~Pain au raisin")
-	elseif id == 46 then
-        VMenu.AddTxT(98,"~y~Donut")
-	elseif id == 47 then
-        VMenu.AddTxT(98,"~y~Eclair au chocolat")
-	elseif id == 48 then
-        VMenu.AddTxT(98,"~y~Gateau d'anniversaire")
-	elseif id == 49 then
-        VMenu.AddTxT(98,"~g~Pétrole")
-	elseif id == 50 then
-        VMenu.AddTxT(98,"~g~Gaz Naturel")
-	elseif id == 51 then
-        VMenu.AddTxT(98,"~g~Essence")
-	elseif id == 52 then
-        VMenu.AddTxT(98,"~g~Gaz brut")
-	elseif id == 53 then
-        VMenu.AddTxT(98,"~y~Kit de réparation")
-	elseif id == 54 then
-        VMenu.AddTxT(98,"~p~Bière")
-	elseif id == 55 then
-        VMenu.AddTxT(98,"~p~Tequila")
-	elseif id == 56 then
-        VMenu.AddTxT(98,"~p~Whiskey")
-	elseif id == 57 then
-        VMenu.AddTxT(98,"~p~Vodka")
-	elseif id == 58 then
-        VMenu.AddTxT(98,"~p~Vin")
-	elseif id == 59 then
-        VMenu.AddTxT(98,"~p~Champagne")
-	elseif id == 60 then
-        VMenu.AddTxT(98,"~b~Couteau")
-	elseif id == 61 then
-        VMenu.AddTxT(98,"~b~Marteau")
-	elseif id == 62 then
-        VMenu.AddTxT(98,"~b~Batte")
-	elseif id == 63 then
-        VMenu.AddTxT(98,"~b~Bouteille")
-	elseif id == 64 then
-        VMenu.AddTxT(98,"~b~Poignard")
-	elseif id == 65 then
-        VMenu.AddTxT(98,"~b~Poing américain")
-	elseif id == 66 then
-        VMenu.AddTxT(98,"~b~Lampe de poche")
-	elseif id == 67 then
-        VMenu.AddTxT(98,"~b~Pistolet")
-	elseif id == 68 then
-        VMenu.AddTxT(98,"~b~Pistol Cal.50")
-	elseif id == 69 then
-        VMenu.AddTxT(98,"~b~Pistolet Lourd")
-	elseif id == 70 then
-        VMenu.AddTxT(98,"~b~Pistolet Vintage")
-	elseif id == 71 then
-        VMenu.AddTxT(98,"~b~Revolver")
-	elseif id == 72 then
-        VMenu.AddTxT(98,"~b~Pistolet de détresse")
-	elseif id == 73 then
-        VMenu.AddTxT(98,"~r~Uzi")
-	elseif id == 74 then
-        VMenu.AddTxT(98,"~r~TEC-9")
-	elseif id == 75 then
-        VMenu.AddTxT(98,"~r~Magpul PDR")
-	elseif id == 76 then
-        VMenu.AddTxT(98,"~r~MPX")
-	elseif id == 77 then
-        VMenu.AddTxT(98,"~r~Fusil à Pompe")
-	elseif id == 78 then
-        VMenu.AddTxT(98,"~r~Fusil à canon scié")
-	elseif id == 79 then
-        VMenu.AddTxT(98,"~r~AK-47")
-	elseif id == 80 then
-        VMenu.AddTxT(98,"~r~TAR-21")
-	elseif id == 81 then
-        VMenu.AddTxT(98,"~r~QBZ-95")
-	elseif id == 82 then
-        VMenu.AddTxT(98,"~r~Gaz BZ")
-	elseif id == 83 then
-        VMenu.AddTxT(98,"~r~Molotov")
-	elseif id == 84 then
-        VMenu.AddTxT(98,"~r~Extincteur")
-	elseif id == 85 then
-        VMenu.AddTxT(98,"~r~Jerrican")
-	elseif id == 86 then
-        VMenu.AddTxT(98,"~r~Flare")
+    if tonumber(quantity) == 0 then
+	    VMenu.inventory = false
+	else
+	    VMenu.inventory = true
+        VMenu.ResetMenu(98, "", "default")
+        Wait(100)
+	    if id == 1 then
+            VMenu.AddTxT(98,"~y~Bouteille d'eau")
+	    elseif id == 2 then
+            VMenu.AddTxT(98,"~y~Sandwich")
+	    elseif id == 3 then
+            VMenu.AddTxT(98,"~y~Poulet Roti")
+	    elseif id == 4 then
+            VMenu.AddTxT(98,"~r~Chanvre")
+	    elseif id == 5 then
+            VMenu.AddTxT(98,"~r~Cannabis roulé")
+    	elseif id == 6 then
+            VMenu.AddTxT(98,"~r~Feuille de coka")
+	    elseif id == 7 then
+            VMenu.AddTxT(98,"~r~Coka")
+    	elseif id == 8 then
+            VMenu.AddTxT(98,"~r~Coka")
+    	elseif id == 9 then
+            VMenu.AddTxT(98,"~r~Ephedrine")
+    	elseif id == 10 then
+            VMenu.AddTxT(98,"~r~Matière illégale")
+    	elseif id == 11 then
+            VMenu.AddTxT(98,"~r~Matière illégale")
+    	elseif id == 12 then
+            VMenu.AddTxT(98,"~r~Meth")
+    	elseif id == 13 then
+            VMenu.AddTxT(98,"~r~Organe")
+    	elseif id == 14 then
+            VMenu.AddTxT(98,"~r~Organe Emballé")
+	    elseif id == 15 then
+            VMenu.AddTxT(98,"~r~Organe Analysé")
+    	elseif id == 16 then
+            VMenu.AddTxT(98,"~r~Organe Livrable")
+	    elseif id == 17 then
+            VMenu.AddTxT(98,"~g~Cuivre")
+    	elseif id == 18 then
+            VMenu.AddTxT(98,"~g~Fer")
+    	elseif id == 19 then
+            VMenu.AddTxT(98,"~g~Diamants")
+    	elseif id == 20 then
+            VMenu.AddTxT(98,"~g~Cables")
+    	elseif id == 21 then
+            VMenu.AddTxT(98,"~g~~g~Fil de fer")
+    	elseif id == 22 then
+            VMenu.AddTxT(98,"~g~Diamants taillés")
+    	elseif id == 23 then
+            VMenu.AddTxT(98,"~g~Roche")
+    	elseif id == 24 then
+            VMenu.AddTxT(98,"~g~Décoration")
+    	elseif id == 25 then
+            VMenu.AddTxT(98,"~g~Poisson")
+	    elseif id == 26 then
+            VMenu.AddTxT(98,"~g~Corps")
+	    elseif id == 27 then
+            VMenu.AddTxT(98,"~g~Corps traité")
+	    elseif id == 28 then
+            VMenu.AddTxT(98,"~y~Soda")
+	    elseif id == 29 then
+            VMenu.AddTxT(98,"~y~Soupe de légumes BIO")
+	    elseif id == 30 then
+            VMenu.AddTxT(98,"~y~Tarte aux fraises")
+	    elseif id == 31 then
+            VMenu.AddTxT(98,"~y~Café")
+    	elseif id == 32 then
+            VMenu.AddTxT(98,"~y~Pizza")
+    	elseif id == 33 then
+            VMenu.AddTxT(98,"~y~Filet de thon")
+    	elseif id == 34 then
+            VMenu.AddTxT(98,"~g~Carotte")
+    	elseif id == 35 then
+            VMenu.AddTxT(98,"~g~Carotte rapée")
+    	elseif id == 36 then
+            VMenu.AddTxT(98,"~g~Pomme de terre")
+	    elseif id == 37 then
+            VMenu.AddTxT(98,"~g~Purée")
+    	elseif id == 38 then
+            VMenu.AddTxT(98,"~g~Tomate")
+	    elseif id == 39 then
+            VMenu.AddTxT(98,"~g~Concentré de tomate")
+    	elseif id == 40 then
+            VMenu.AddTxT(98,"~g~Blé")
+    	elseif id == 41 then
+            VMenu.AddTxT(98,"~g~Pain")
+    	elseif id == 42 then
+            VMenu.AddTxT(98,"~y~Pain")
+    	elseif id == 43 then
+            VMenu.AddTxT(98,"~y~Croissant")
+    	elseif id == 44 then
+            VMenu.AddTxT(98,"~y~Chocolatine")
+    	elseif id == 45 then
+            VMenu.AddTxT(98,"~y~Pain au raisin")
+    	elseif id == 46 then
+            VMenu.AddTxT(98,"~y~Donut")
+    	elseif id == 47 then
+            VMenu.AddTxT(98,"~y~Eclair au chocolat")
+    	elseif id == 48 then
+            VMenu.AddTxT(98,"~y~Gateau d'anniversaire")
+    	elseif id == 49 then
+            VMenu.AddTxT(98,"~g~Pétrole")
+    	elseif id == 50 then
+            VMenu.AddTxT(98,"~g~Gaz Naturel")
+    	elseif id == 51 then
+            VMenu.AddTxT(98,"~g~Essence")
+    	elseif id == 52 then
+            VMenu.AddTxT(98,"~g~Gaz brut")
+    	elseif id == 53 then
+            VMenu.AddTxT(98,"~y~Kit de réparation")
+    	elseif id == 54 then
+            VMenu.AddTxT(98,"~p~Bière")
+    	elseif id == 55 then
+            VMenu.AddTxT(98,"~p~Tequila")
+    	elseif id == 56 then
+            VMenu.AddTxT(98,"~p~Whiskey")
+    	elseif id == 57 then
+            VMenu.AddTxT(98,"~p~Vodka")
+    	elseif id == 58 then
+            VMenu.AddTxT(98,"~p~Vin")
+	    elseif id == 59 then
+            VMenu.AddTxT(98,"~p~Champagne")
+    	elseif id == 60 then
+            VMenu.AddTxT(98,"~b~Couteau")
+    	elseif id == 61 then
+            VMenu.AddTxT(98,"~b~Marteau")
+    	elseif id == 62 then
+            VMenu.AddTxT(98,"~b~Batte")
+    	elseif id == 63 then
+            VMenu.AddTxT(98,"~b~Bouteille")
+    	elseif id == 64 then
+            VMenu.AddTxT(98,"~b~Poignard")
+    	elseif id == 65 then
+            VMenu.AddTxT(98,"~b~Poing américain")
+    	elseif id == 66 then
+            VMenu.AddTxT(98,"~b~Lampe de poche")
+    	elseif id == 67 then
+            VMenu.AddTxT(98,"~b~Pistolet")
+    	elseif id == 68 then
+            VMenu.AddTxT(98,"~b~Pistol Cal.50")
+    	elseif id == 69 then
+            VMenu.AddTxT(98,"~b~Pistolet Lourd")
+    	elseif id == 70 then
+            VMenu.AddTxT(98,"~b~Pistolet Vintage")
+    	elseif id == 71 then
+            VMenu.AddTxT(98,"~b~Revolver")
+    	elseif id == 72 then
+            VMenu.AddTxT(98,"~b~Pistolet de détresse")
+    	elseif id == 73 then
+            VMenu.AddTxT(98,"~r~Uzi")
+    	elseif id == 74 then
+            VMenu.AddTxT(98,"~r~TEC-9")
+    	elseif id == 75 then
+            VMenu.AddTxT(98,"~r~Magpul PDR")
+    	elseif id == 76 then
+            VMenu.AddTxT(98,"~r~MPX")
+	    elseif id == 77 then
+            VMenu.AddTxT(98,"~r~Fusil à Pompe")
+    	elseif id == 78 then
+            VMenu.AddTxT(98,"~r~Fusil à canon scié")
+    	elseif id == 79 then
+            VMenu.AddTxT(98,"~r~AK-47")
+    	elseif id == 80 then
+            VMenu.AddTxT(98,"~r~TAR-21")
+    	elseif id == 81 then
+            VMenu.AddTxT(98,"~r~QBZ-95")
+    	elseif id == 82 then
+            VMenu.AddTxT(98,"~r~Gaz BZ")
+    	elseif id == 83 then
+            VMenu.AddTxT(98,"~r~Molotov")
+	    elseif id == 84 then
+            VMenu.AddTxT(98,"~b~Extincteur")
+    	elseif id == 85 then
+            VMenu.AddTxT(98,"~b~Jerrican")
+	    elseif id == 86 then
+            VMenu.AddTxT(98,"~b~Flare")
+		elseif id == 87 then
+		    VMenu.AddTxT(98,"~b~Munitions")
+		elseif id == 88 then
+		    VMenu.AddTxT(98,"~r~Kit de crochetage")
+    	end
+	    if (id == 60 or id == 61 or id == 62 or id == 63 or id == 64 or id == 65 or id == 66 or id == 67 or id == 68 or id == 69 or id == 70 or id == 71 or id == 72 or id == 73 or id == 74 or id == 75 or id == 76 or id == 77 or id == 78 or id == 79 or id == 80 or id == 81 or id == 82 or id == 83 or id == 84 or id == 85 or id == 86) then
+	        if alreadyweaponequiped() then
+    		    VMenu.AddTxT(98,"Quantité posédée: (" .. quantity .. ")")
+	    		VMenu.AddFunc(98, "Retour", "vmenu:MainMenuOG", {}, "Retour")
+	    	    VMenu.AddTxT(98, "Une arme est ~g~équipée")
+	    		VMenu.AddFunc(98, "Déséquiper", "inventory:unequipweapon", {id, name, quantity}, "Déséquiper l'arme")
+	    		VMenu.AddFunc(98, "Donner", "inventory:giveItem", {id, name, quantity}, "Donner l'arme à un autre citoyen")
+                VMenu.AddFunc(98, "~r~Jeter", "inventory:dropItem", {id, name, quantity}, "~r~Jeter l'arme")
+	    	else
+			    VMenu.AddTxT(98,"Quantité posédée: (" .. quantity .. ")")
+				VMenu.AddFunc(98, "Retour", "vmenu:MainMenuOG", {}, "Retour")
+	    	    VMenu.AddTxT(98, "Cette arme ~r~n'est pas équipée")
+    		    VMenu.AddFunc(98, "Équiper", "inventory:equipweapon", {id, name, quantity}, "Équiper l'arme")
+    			VMenu.AddFunc(98, "Donner", "inventory:entergiveItem", {id, name, quantity}, "Donner l'arme à un autre citoyen")
+                VMenu.AddFunc(98, "~r~Jeter", "inventory:dropItem", {id, name, quantity}, "~r~Jeter l'arme")
+	    	end
+	    else
+    		VMenu.AddTxT(98,"Quantité posédée: (" .. quantity .. ")")	
+            VMenu.AddFunc(98, "Retour", "vmenu:MainMenuOG", {}, "Retour")
+	        VMenu.AddFunc(98, "Utiliser", "inventory:useItem", {id, name, quantity}, "Utiliser l'objet")
+            VMenu.AddFunc(98, "Donner", "inventory:giveItem", {id, name, quantity}, "Donner l'objet à un autre citoyen")
+            VMenu.AddFunc(98, "~r~Jeter", "inventory:dropItem", {id, name, quantity}, "~r~Jeter l'objet")
+		end
 	end
-	VMenu.AddTxT(98,"Quantité posédée: (" .. quantity .. ")")	
-    VMenu.AddFunc(98, "Retour", "vmenu:MainMenuOG", {}, "Retour")
-	VMenu.AddFunc(98, "Utiliser", "inventory:useItem", {id}, "Utiliser l'objet")
-    VMenu.AddFunc(98, "Donner", "inventory:giveItem", {id, name, quantity}, "Donner l'objet à un autre citoyen")
-    VMenu.AddFunc(98, "~r~Jeter", "inventory:dropItem", {id, name, quantity}, "~r~Jeter l'objet")
 end)
 
-AddEventHandler("inventory:useItem", function(target, id) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
+local ammonequip = false
+
+AddEventHandler("inventory:useItem", function(target, id, name, quantity) -- target = Dernier joueur à avoir parlé, pas besoin ici. Mais obligatoire !
 	local useItem = {}
 	local value = 0
 	for _, val in ipairs(inv_array_legal) do
@@ -333,10 +361,12 @@ AddEventHandler("inventory:useItem", function(target, id) -- target = Dernier jo
 	elseif id == 53 then
 	    if not IsInVehicle() then
 	        TriggerEvent("repair:repairkit")
+			ammonequip = false
 		else
-		    ShowMsgtime.msg = '~r~Vous ne pouvez par réparer le véhicule de l\'intérieur'
+		    ShowMsgtime.msg = '~r~Vous ne pouvez pas réparer le véhicule de l\'intérieur'
             ShowMsgtime.time = 250
 			TriggerEvent("player:receiveItem", 53, 1)
+			ammonequip = true
 		end
 	elseif (id == 42 or id == 43 or id == 44 or id == 45 or id == 46 or id == 47 or id == 48 or id == 30) then
 	    TriggerEvent("inventory:useItemB", target, id)
@@ -346,18 +376,26 @@ AddEventHandler("inventory:useItem", function(target, id) -- target = Dernier jo
 	    TriggerEvent("inventory:useItemL", target, id)
 	elseif (id == 4 or id == 5 or id == 6 or id == 7 or id == 8 or id == 9 or id == 10 or id == 11 or id == 12 or id == 13 or id == 14 or id == 15 or id == 16) then
 	    TriggerEvent("inventory:useItemI", target, id)
-	elseif (id == 60 or id == 61 or id == 62 or id == 63 or id == 64 or id == 65 or id == 66) then
-        TriggerEvent("inventory:useItemGunM", target, id)	
-	elseif (id == 67 or id == 68 or id == 69 or id == 70 or id == 71 or id == 72) then
-	    TriggerEvent("inventory:useItemGunP", target, id)
-	elseif (id == 73 or id == 74 or id == 75 or id == 76) then
-	    TriggerEvent("inventory:useItemGuniSMG", target, id)
-	elseif (id == 77 or id == 78) then
-	    TriggerEvent("inventory:useItemGuniSG", target, id)
-	elseif (id == 79 or id == 80 or id == 81) then
-	    TriggerEvent("inventory:useItemGuniAR", target, id)
-	elseif (id == 82 or id == 83 or id == 84 or id == 85 or id == 86) then
-	    TriggerEvent("inventory:useItemGuniT", target, id)
+	elseif id == 87 then
+	    if alreadyweaponequiped() then
+		    useAmmo()
+			DrawNotif("~g~Votre arme est chargée")
+			ammonequip = false
+		else
+	        DrawNotif("~r~Vous n'avez pas d'arme équipée")
+			TriggerEvent("player:receiveItem", 87, 1)
+			ammonequip = true
+		end 
+    elseif id == 88 then
+	    if not IsInVehicle() then
+	        TriggerEvent("lockpick:uselockpick")
+			ammonequip = false
+		else
+		    ShowMsgtime.msg = '~r~Vous ne pouvez pas crocheter une voiture de l\'intérieur'
+            ShowMsgtime.time = 250
+			TriggerEvent("player:receiveItem", 88, 1)
+			ammonequip = true
+		end		
 	else
 		if IsInVehicle() then
 			TriggerEvent("food:veat", value)
@@ -365,7 +403,11 @@ AddEventHandler("inventory:useItem", function(target, id) -- target = Dernier jo
 			TriggerEvent("food:eat", useItem)
 		end
 	end	
-	TriggerEvent("vmenu:MainMenuOG")
+	if ammonequip then
+	    TriggerEvent("inventory:menuItem", target, id, name, tonumber(quantity))
+	else
+	    TriggerEvent("inventory:menuItem", target, id, name, tonumber(quantity)-1)
+	end
 end)
 
 AddEventHandler("inventory:useItemB", function(target, id)
@@ -479,95 +521,99 @@ AddEventHandler("inventory:useItemI", function(target, id)
 	end
 end)
 
-AddEventHandler("inventory:useItemGunM", function(target, id)
-    for _, val in ipairs(inv_array_meleeweapon) do
-	    if id == val.id then
-		    value = val.value
-			useItem = val
-		end
+RegisterNetEvent("inventory:equipweapon")
+AddEventHandler("inventory:equipweapon", function(target, id, name, quantity)
+    if id == 60 then
+	    giveweapon("WEAPON_Knife")
+		DrawNotif("Vous équiper un ~b~couteau")
+	elseif id == 61 then
+	    giveweapon("WEAPON_HAMMER")    
+		DrawNotif("Vous équiper un ~b~marteau")
+	elseif id == 62 then
+	    giveweapon("WEAPON_Bat")
+		DrawNotif("Vous équiper une ~b~batte de baseball")
+	elseif id == 63 then
+	    giveweapon("WEAPON_Bottle")
+		DrawNotif("Vous équiper une ~b~bouteille")
+	elseif id == 64 then
+	    giveweapon("WEAPON_Dagger")
+		DrawNotif("Vous équiper un ~b~poignard")
+	elseif id == 65 then
+	    giveweapon("WEAPON_KNUCKLE")
+		DrawNotif("Vous équiper un ~b~poing américain")
+	elseif id == 66 then
+	    giveweapon("WEAPON_Flashlight")
+		DrawNotif("Vous équiper une ~b~lampe torche")
+	elseif id == 67 then
+	    giveweapon("WEAPON_Pistol")
+		DrawNotif("Vous équiper un ~b~pistolet")
+	elseif id == 68 then
+	    giveweapon("WEAPON_PISTOL50")
+		DrawNotif("Vous équiper un ~b~pistolet cal.50")
+	elseif id == 69 then
+	    giveweapon("WEAPON_HeavyPistol")
+		DrawNotif("Vous équiper un ~b~pistolet lourd")
+	elseif id == 70 then
+	    giveweapon("WEAPON_VintagePistol")
+		DrawNotif("Vous équiper un ~b~pistolet vintage")
+	elseif id == 71 then
+	    giveweapon("WEAPON_Revolver")
+		DrawNotif("Vous équiper un ~b~revolver")
+	elseif id == 72 then
+	    giveweapon("WEAPON_FlareGun")
+		DrawNotif("Vous équiper un ~b~pistolet de détresse")
+	elseif id == 73 then
+	    giveweapon("WEAPON_MicroSMG")
+		DrawNotif("Vous équiper un ~r~Uzi")
+	elseif id == 74 then
+	    giveweapon("WEAPON_MachinePistol")
+		DrawNotif("Vous équiper un ~r~TEC-9")
+	elseif id == 75 then
+	    giveweapon("WEAPON_AssaultSMG")
+		DrawNotif("Vous équiper un ~r~Magpul PDR")
+	elseif id == 76 then
+	    giveweapon("WEAPON_CombatPDW")
+		DrawNotif("Vous équiper un ~r~MPX")
+	elseif id == 77 then
+	    giveweapon("WEAPON_PumpShotgun")
+		DrawNotif("Vous équiper un ~r~fusil à pompe")
+	elseif id == 78 then
+	    giveweapon("WEAPON_SawnoffShotgun")
+		DrawNotif("Vous équiper un ~r~fusil à canon scié")
+	elseif id == 79 then
+	    giveweapon("WEAPON_AssaultRifle")
+		DrawNotif("Vous équiper un ~r~AK-47")
+	elseif id == 80 then
+	    giveweapon("WEAPON_AdvancedRifle")
+		DrawNotif("Vous équiper un ~r~TAR-21")
+	elseif id == 81 then
+	    giveweapon("WEAPON_BullpupRifle")
+		DrawNotif("Vous équiper un ~r~QBZ-95")
+	elseif id == 82 then
+	    giveweapon("WEAPON_BZGas")
+		DrawNotif("Vous équiper un ~r~Gaz BZ")
+	elseif id == 83 then
+	    giveweapon("WEAPON_Molotov")
+		DrawNotif("Vous équiper un ~r~cocktail molotov")
+	elseif id == 84 then
+	    giveweapon("WEAPON_FireExtinguisher")
+		DrawNotif("Vous équiper un ~b~extincteur")
+	elseif id == 85 then
+	    giveweapon("WEAPON_PetrolCan")
+		DrawNotif("Vous équiper un ~b~jerrican")
+	elseif id == 86 then
+	    giveweapon("WEAPON_Flare")
+		DrawNotif("Vous équiper un ~b~flare")
 	end
-	delete({ id, 1})
-	if IsInVehicle() then
-		TriggerEvent("food:vdrink", value)
-	else
-		TriggerEvent("food:drink", useItem)
-	end
+	Wait(100)
+	TriggerEvent("inventory:menuItem", target, id, name, quantity)
 end)
 
-AddEventHandler("inventory:useItemGunP", function(target, id)
-    for _, val in ipairs(inv_array_pistolweapon) do
-	    if id == val.id then
-		    value = val.value
-			useItem = val
-		end
-	end
-	delete({ id, 1})
-	if IsInVehicle() then
-		TriggerEvent("food:vdrink", value)
-	else
-		TriggerEvent("food:drink", useItem)
-	end
-end)
-
-AddEventHandler("inventory:useItemGuniSMG", function(target, id)
-    for _, val in ipairs(inv_array_illegalsmg) do
-	    if id == val.id then
-		    value = val.value
-			useItem = val
-		end
-	end
-	delete({ id, 1})
-	if IsInVehicle() then
-		TriggerEvent("food:vdrink", value)
-	else
-		TriggerEvent("food:drink", useItem)
-	end
-end)
-
-AddEventHandler("inventory:useItemGuniSG", function(target, id)
-    for _, val in ipairs(inv_array_illegalshotgun) do
-	    if id == val.id then
-		    value = val.value
-			useItem = val
-		end
-	end
-	delete({ id, 1})
-	if IsInVehicle() then
-		TriggerEvent("food:vdrink", value)
-	else
-		TriggerEvent("food:drink", useItem)
-	end
-end)
-
-AddEventHandler("inventory:useItemGuniAR", function(target, id)
-    for _, val in ipairs(inv_array_illegalrifles) do
-	    if id == val.id then
-		    value = val.value
-			useItem = val
-		end
-	end
-	delete({ id, 1})
-	if IsInVehicle() then
-		TriggerEvent("food:vdrink", value)
-	else
-		TriggerEvent("food:drink", useItem)
-	end
-end)
-
-
-AddEventHandler("inventory:useItemGuniT", function(target, id)
-    for _, val in ipairs(inv_array_illegalthrown) do
-	    if id == val.id then
-		    value = val.value
-			useItem = val
-		end
-	end
-	delete({ id, 1})
-	if IsInVehicle() then
-		TriggerEvent("food:vdrink", value)
-	else
-		TriggerEvent("food:drink", useItem)
-	end
+RegisterNetEvent("inventory:unequipweapon")
+AddEventHandler("inventory:unequipweapon", function(target, id, name, quantity)
+    removeweapon()
+	DrawNotif("~r~Vous déséquiper votre arme")
+	TriggerEvent("inventory:menuItem", target, id, name, quantity)
 end)
 
 --------    EVENT POUR LE GATHER DES RESSOURCES ILLÉGALES SANS PRICE
@@ -607,9 +653,9 @@ end)
 RegisterNetEvent("inventory:dropItem")
 AddEventHandler("inventory:dropItem", function(target, id, name, quantity)
 	TriggerEvent("player:looseItem", id, 1)
-	TriggerEvent("itinerance:notif", "Vous avez jeté ~r~1" ..name.. "~w~.")
+	TriggerEvent("itinerance:notif", "Vous avez jeté ~r~1 " ..name.. "~w~.")
 	giveItemConfirmed = true
-	TriggerEvent("vmenu:MainMenuOG")
+	TriggerEvent("inventory:menuItem", target, id, name, tonumber(quantity)-1)
 end)
 
 RegisterNetEvent("player:looseItem")
@@ -632,9 +678,22 @@ AddEventHandler("item:reset", function()
 	TriggerServerEvent("inventory:reset_s")
 end)
 
+AddEventHandler("inventory:entergiveItem", function(item, quantity)
+	DisplayOnscreenKeyboard(false, "FMMC_KEY_TIP8", "", "", "", "", "", 64)
+    while (UpdateOnscreenKeyboard() == 0) do
+        DisableAllControlActions(0);
+        Wait(0);
+        
+    end
+    if (GetOnscreenKeyboardResult()) then
+        local result = GetOnscreenKeyboardResult()
+       	TriggerEvent("inventory:giveItem", item, result)
+	end
+end)
+
 RegisterNetEvent("inventory:giveItem_f")
 AddEventHandler("inventory:giveItem_f", function(item, quantity)
-	TriggerEvent("player:receiveItem", item, 1)
+	TriggerEvent("player:receiveItem", item, quantity)
 end)
 
 --------- EVENT FROM SERVER NO TARGET
@@ -670,6 +729,37 @@ function IsInVehicle()
   end
 end
 
+function giveweapon(model)
+    Citizen.CreateThread(function()
+		local weapon = GetHashKey(model)
+        Wait(100)
+        local hash = GetHashKey(model)
+        GiveWeaponToPed(GetPlayerPed(-1), weapon, 5, 0, true)
+    end)
+end
+
+function alreadyweaponequiped()
+    local player = GetPlayerPed(-1)
+	local pedweapon = GetSelectedPedWeapon(player)
+	if HasPedGotWeapon(player, pedweapon) then
+	    return true
+	else
+	    return false
+	end
+end
+
+function removeweapon()
+    local player = GetPlayerPed(-1)
+	local weaponHash = GetSelectedPedWeapon(player)
+	RemoveWeaponFromPed(player, weaponHash)
+end
+
+function useAmmo()
+    local player = GetPlayerPed(-1)
+	local pedweapon = GetSelectedPedWeapon(player)
+	local maxammo = GetMaxAmmo(player, pedweapon)
+	AddAmmoToPed(player, pedweapon, 250)
+end
 
 RegisterNetEvent("inventory:removemenu")
 AddEventHandler("inventory:removemenu", function()

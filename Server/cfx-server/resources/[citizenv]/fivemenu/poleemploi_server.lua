@@ -61,6 +61,14 @@ AddEventHandler('poleemploi:jobs', function(id)
   end)
 end)
 
+RegisterServerEvent("poleemploi:jobblips_s")
+AddEventHandler("poleemploi:jobblips_s", function()
+    TriggerEvent('es:getPlayerFromId', source, function(user)
+        local source = source
+        TriggerClientEvent("vmenu:Updatejobblips", source, user:getJob())
+    end)
+end)
+
 RegisterServerEvent('poleemploi:getjobs')
 AddEventHandler('poleemploi:getjobs', function()
   TriggerEvent('es:getPlayerFromId', source, function(user)

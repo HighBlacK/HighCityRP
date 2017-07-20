@@ -24,6 +24,7 @@ function ShowNotification(text)
 end
 
 
+
 Citizen.CreateThread(function()
 	while true do
 	Citizen.Wait(0)
@@ -40,5 +41,28 @@ Citizen.CreateThread(function()
 			    SetVehicleUndriveable(vehicle, false)
 			end
 		end
+	end
+end)
+
+
+Citizen.CreateThread(function()
+
+	while true do
+
+		Citizen.Wait(0)
+
+		playerPed = GetPlayerPed(-1)
+		if playerPed then
+			playerCar = GetVehiclePedIsIn(playerPed, false)
+			if playerCar and GetPedInVehicleSeat(playerCar, -1) == playerPed then
+				Citizen.Wait(200)
+		
+				if GetVehicleEngineHealth(playerCar) < 950 then --max 1000 min 0
+				   SetVehicleUndriveable(playerCar, 1)
+				   ShowNotification("Le moteur du véhicule est ~r~trop endommagé.")
+				end
+			end
+		end
+
 	end
 end)

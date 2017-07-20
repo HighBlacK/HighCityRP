@@ -23,9 +23,10 @@ local lang = 'fr'
 
 local txt = {
   ['fr'] = {
-		['getService'] = 'Appuyez sur ~INPUT_CONTEXT~ pour ~b~prendre votre service~w~.',
-		['dropService'] = 'Appuyez sur ~INPUT_CONTEXT~ pour ~b~terminer votre service~w~.',
-		['getAmbulance'] = 'Appuyez sur ~INPUT_CONTEXT~ pour ~b~obtenir un véhicule~w~.',
+		['getService'] = 'Appuyez sur ~INPUT_CONTEXT~ pour prendre votre service~w~.',
+		['dropService'] = 'Appuyez sur ~INPUT_CONTEXT~ pour terminer votre service~w~.',
+		['getAmbulance'] = 'Appuyez sur ~INPUT_CONTEXT~ pour obtenir un véhicule~w~.',
+		['storeAmbulance'] = 'Appuyer sur ~INPUT_CONTEXT~ pour ranger votre ambulance.',
 		['callTaken'] = 'L\'appel a été pris par ~b~',
 		['emergency'] = '<b>~r~URGENCE~s~ <br><br>~b~Raison~s~: </b>',
 		['takeCall'] = '<b>Appuyez sur ~g~Y~s~ pour prendre l\'appel.</b>',
@@ -41,6 +42,7 @@ local txt = {
 		['getService'] = 'Press ~g~E~s~ to take your service',
 		['dropService'] = 'Press ~g~E~s~ to stop your service',
 		['getAmbulance'] = 'Press ~g~E~s~ to get your car',
+		['storeAmbulance'] = 'Press ~INPUT_CONTEXT~ to store your ambulance.',
 		['callTaken'] = 'The call is taken by ~b~',
 		['emergency'] = '<b>~r~EMERGENCY~s~ <br><br>~b~Reason~s~: </b>',
 		['takeCall'] = '<b>Press ~g~Y~s~ to take the call</b>',
@@ -94,11 +96,33 @@ Citizen.CreateThread(
 		end
 end)
 
+function IsInVehicle()
+  local ply = GetPlayerPed(-1)
+  if IsPedSittingInAnyVehicle(ply) then
+    return true
+  else
+    return false
+  end
+end
+
+function deleteCar(car)
+  SetEntityAsMissionEntity(car, true, true)
+  Citizen.InvokeNative( 0xEA386986E786A54F, Citizen.PointerValueIntInitialized( car ))
+  Citizen.InvokeNative( 0xB736A491E64A32CF, Citizen.PointerValueIntInitialized( car ))
+  Citizen.InvokeNative( 0xAE3CBE5BF394C9C9, Citizen.PointerValueIntInitialized( car ))
+end
+
+function DrawNotif(text)
+	SetNotificationTextEntry("STRING")
+	AddTextComponentString(text)
+	DrawNotification(false, false)
+end
+
 Citizen.CreateThread(
 	function()
-		local x = 324.94091796875
-		local y = -1474.1514892578
-		local z = 29.804544448853
+		local x = 327.501
+		local y = -1470.53
+		local z = 29.7674
 
 		while true do
 			Citizen.Wait(1)
@@ -110,11 +134,20 @@ Citizen.CreateThread(
 				DrawMarker(1, x, y, z - 1, 0, 0, 0, 0, 0, 0, 3.0001, 3.0001, 1.5001, 255, 165, 0,165, 0, 0, 0,0)
 
 				if (Vdist(playerPos.x, playerPos.y, playerPos.z, x, y, z) < 2.0) then
-					DisplayHelpText(txt[lang]['getAmbulance'])
-
-					if (IsControlJustReleased(1, 51)) then
-						TriggerServerEvent("es_em:getAmbulanceGarage")
-					end
+				    if IsInVehicle() then
+					    DisplayHelpText(txt[lang]['storeAmbulance'])
+						if (IsControlJustReleased(1, 51)) then
+							local ped = GetPlayerPed(-1)
+		                    local vehicle = GetVehiclePedIsUsing(ped)
+							deleteCar(vehicle)
+                            DrawNotif('L\'ambulance est ~g~rentrée')
+						end
+					else
+				    	DisplayHelpText(txt[lang]['getAmbulance'])
+				    	if (IsControlJustReleased(1, 51)) then
+				    		TriggerServerEvent("es_em:getAmbulanceGarage")
+				    	end
+				    end
 				end
 			end
 		end
@@ -329,19 +362,19 @@ function ShowBlipsAmbulance()
 	BlipGarageAmbulance = AddBlipForCoord(326.05633544922, -1469.7686767578, 25.801725387573)
 
 	SetBlipSprite(BlipGarageAmbulance, 357)
-	SetBlipColour(BlipGarageAmbulance, 1)
+	SetBlipColour(BlipGarageAmbulance, 2)
 	SetBlipAsShortRange(BlipGarageAmbulance, true)
 	BeginTextCommandSetBlipName("STRING")
-	AddTextComponentString('Garage (ambulance)')
+	AddTextComponentString('~g~Garage(Ambulance)')
 	EndTextCommandSetBlipName(BlipGarageAmbulance)
 	
 	BlipGarageHelicoAmbulance = AddBlipForCoord(313.223, -1464.935, 46.509)
 
 	SetBlipSprite(BlipGarageHelicoAmbulance, 360)
-	SetBlipColour(BlipGarageHelicoAmbulance, 1)
+	SetBlipColour(BlipGarageHelicoAmbulance, 2)
 	SetBlipAsShortRange(BlipGarageHelicoAmbulance, true)
 	BeginTextCommandSetBlipName("STRING")
-	AddTextComponentString('Héliport (ambulance)')
+	AddTextComponentString('~g~Héliport(Ambulance)')
 	EndTextCommandSetBlipName(BlipGarageHelicoAmbulance)
 	
 end

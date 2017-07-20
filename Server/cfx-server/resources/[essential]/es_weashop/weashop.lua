@@ -521,3 +521,5 @@ AddEventHandler('giveWeapon', function(name, delay)
         GiveWeaponToPed(GetPlayerPed(-1), weapon, 1000, 0, false)
     end)
 end)
+
+--RemoveWeaponFromPed(ped, weaponHash)
